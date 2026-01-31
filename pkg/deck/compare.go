@@ -21,7 +21,7 @@ func (d *Deck) Union(d2 *Deck) *Deck {
 			count2 := c.Count
 			existingCard := union.cards[c.Name]
 			existingCard.Count = max(count1, count2)
-			union.cards[c.Name] = existingCard
+			union.Set(c.Name, existingCard)
 		}
 	}
 	return union
