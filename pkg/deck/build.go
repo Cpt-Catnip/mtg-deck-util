@@ -1,10 +1,5 @@
 package deck
 
-import (
-	"fmt"
-	"strings"
-)
-
 type Deck struct {
 	cards map[string]Card
 	size  int
@@ -35,6 +30,7 @@ func (d *Deck) Add(cardName string) {
 		}
 	} else {
 		c.Count += 1
+		d.Set(cardName, c)
 	}
 	d.size = d.size + 1
 }
@@ -51,6 +47,7 @@ func (d *Deck) AddN(cardName string, count int) {
 		}
 	} else {
 		c.Count += count
+		d.Set(cardName, c)
 	}
 	d.size += count
 }
@@ -64,6 +61,7 @@ func (d *Deck) Remove(cardName string) {
 		delete(d.cards, cardName)
 	} else {
 		c.Count = c.Count - 1
+		d.Set(cardName, c)
 	}
 	d.size -= 1
 }
@@ -80,24 +78,7 @@ func (d *Deck) RemoveN(cardName string, count int) {
 		delete(d.cards, cardName)
 	} else {
 		c.Count -= count
+		d.Set(cardName, c)
 	}
 	d.size -= count
-}
-
-func (d *Deck) Has(cardName string) bool {
-	_, ok := d.cards[cardName]
-	return ok
-}
-
-func (d *Deck) Size() int {
-	return d.size
-}
-
-func (d *Deck) String() string {
-	b := strings.Builder{}
-	for _, c := range d.cards {
-		fmt.Fprintf(&b, "%d %s\n", c.Count, c.Name)
-	}
-	s := b.String()
-	return s[0 : len(s)-1]
 }

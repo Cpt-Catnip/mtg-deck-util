@@ -7,11 +7,19 @@ import (
 )
 
 func main() {
-	d, err := deck.Import("./beeg_sqwirl.txt")
+	d1, err := deck.Import("./beeg_sqwirl.txt")
 	if err != nil {
 		fmt.Printf("error importing deck: %s", err)
 	}
-	fmt.Println(d.String())
-	fmt.Println("~~~~~~~~~~~~~~~~~")
-	fmt.Println(d.Size())
+
+	d2, err := deck.Import("./creative_squirrels_matter.txt")
+	if err != nil {
+		fmt.Printf("error importing deck: %s", err)
+	}
+
+	toAdd := d1.Diff(d2)
+	toRemove := d2.Diff(d1)
+
+	fmt.Printf("Cards to add\n============\n%s\n\n", toAdd)
+	fmt.Printf("Cards to remove\n===============\n%s\n", toRemove)
 }

@@ -1,6 +1,8 @@
 package deck
 
-import "maps"
+import (
+	"maps"
+)
 
 func (d *Deck) Intersect(d2 *Deck) *Deck {
 	intersection := NewDeck()
@@ -16,6 +18,7 @@ func (d *Deck) Intersect(d2 *Deck) *Deck {
 func (d *Deck) Union(d2 *Deck) *Deck {
 	union := NewDeck()
 	union.cards = maps.Collect(maps.All(d.cards))
+	union.size = d.size
 	for _, c := range d2.cards {
 		if !union.Has(c.Name) {
 			union.AddN(c.Name, c.Count)
@@ -33,6 +36,7 @@ func (d *Deck) Union(d2 *Deck) *Deck {
 func (d *Deck) Diff(d2 *Deck) *Deck {
 	diff := NewDeck()
 	diff.cards = maps.Collect(maps.All(d.cards))
+	diff.size = d.size
 	for _, c := range d2.cards {
 		diff.RemoveN(c.Name, c.Count)
 	}
