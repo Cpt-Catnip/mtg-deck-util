@@ -27,9 +27,14 @@ func NewDeck(cs ...string) *Deck {
 }
 
 func (d *Deck) Add(cardName string) {
-	d.cards[cardName] = Card{
-		Name:  cardName,
-		Count: 1,
+	c, ok := d.cards[cardName]
+	if !ok {
+		d.cards[cardName] = Card{
+			Name:  cardName,
+			Count: 1,
+		}
+	} else {
+		c.Count += 1
 	}
 	d.size = d.size + 1
 }
@@ -38,9 +43,14 @@ func (d *Deck) AddN(cardName string, count int) {
 	if count < 1 {
 		return
 	}
-	d.cards[cardName] = Card{
-		Name:  cardName,
-		Count: count,
+	c, ok := d.cards[cardName]
+	if !ok {
+		d.cards[cardName] = Card{
+			Name:  cardName,
+			Count: count,
+		}
+	} else {
+		c.Count += count
 	}
 	d.size += count
 }
@@ -56,6 +66,22 @@ func (d *Deck) Remove(cardName string) {
 		c.Count = c.Count - 1
 	}
 	d.size -= 1
+}
+
+func (d *Deck) RemoveN(cardName string, count int) {
+	if count < 1 {
+		return
+	}
+	c, ok := d.cards[cardName]
+	if !ok {
+		return
+	}
+	if count >= c.Count {
+		delete(d.cards, cardName)
+	} else {
+		c.Count -= count
+	}
+	d.size -= count
 }
 
 func (d *Deck) Has(cardName string) bool {
