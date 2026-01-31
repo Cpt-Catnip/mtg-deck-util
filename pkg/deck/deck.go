@@ -63,10 +63,15 @@ func (d *Deck) Has(cardName string) bool {
 	return ok
 }
 
+func (d *Deck) Size() int {
+	return d.size
+}
+
 func (d *Deck) String() string {
 	b := strings.Builder{}
 	for _, c := range d.cards {
 		fmt.Fprintf(&b, "%d %s\n", c.Count, c.Name)
 	}
-	return b.String()
+	s := b.String()
+	return s[0 : len(s)-1]
 }
