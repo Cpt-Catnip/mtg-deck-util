@@ -82,3 +82,7 @@ func (d *Deck) RemoveN(cardName string, count int) {
 	}
 	d.size -= count
 }
+
+func (d *Deck) RemoveAll(cardName string) {
+	delete(d.cards, cardName)
+}
