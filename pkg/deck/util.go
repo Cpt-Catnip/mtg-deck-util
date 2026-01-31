@@ -2,6 +2,7 @@ package deck
 
 import (
 	"fmt"
+	"maps"
 	"strings"
 )
 
@@ -30,4 +31,11 @@ func (d *Deck) String() string {
 	}
 	s := b.String()
 	return s[0 : len(s)-1]
+}
+
+func (d *Deck) Copy() *Deck {
+	copy := NewDeck()
+	copy.cards = maps.Collect(maps.All(d.cards))
+	copy.size = d.size
+	return copy
 }
