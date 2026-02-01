@@ -25,6 +25,7 @@ func (d *Deck) Size() int {
 }
 
 func (d *Deck) String() string {
+	//TODO: sort cards
 	b := strings.Builder{}
 	for _, c := range d.cards {
 		fmt.Fprintf(&b, "%d %s\n", c.Count, c.Name)
