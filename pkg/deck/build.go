@@ -64,5 +64,6 @@ func (d *Deck) RemoveN(cardName string, count int) {
 }
 
 func (d *Deck) RemoveAll(cardName string) {
-	delete(d.cards, cardName)
+	c, _ := d.Get(cardName)
+	d.RemoveN(cardName, c.Count)
 }
