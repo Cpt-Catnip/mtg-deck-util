@@ -20,6 +20,8 @@ func main() {
 	toAdd := d1.Diff(d2)
 	toRemove := d2.Diff(d1)
 
-	fmt.Printf("Cards to add\n============\n%s\n\n", toAdd)
+	fmt.Printf("Cards to add\n============\n%s\n", toAdd)
+	fmt.Printf("~~~~~~~~~~~~\n%d cards\n\n", toAdd.Size())
 	fmt.Printf("Cards to remove\n===============\n%s\n", toRemove)
+	fmt.Printf("~~~~~~~~~~~~\n%d cards\n", toRemove.Size())
 }
