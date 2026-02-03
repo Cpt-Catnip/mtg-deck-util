@@ -6,6 +6,8 @@ import (
 	"strings"
 )
 
+// TODO: make nice helper function to print list with title
+
 func (d *Deck) Has(cardName string) bool {
 	_, ok := d.cards[cardName]
 	return ok

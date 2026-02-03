@@ -6,22 +6,24 @@ import (
 	"github.com/Cpt-Catnip/mtg-deck-util/pkg/deck"
 )
 
+// TODO: add command line args
+// TODO: figure out deck import but
 func main() {
-	d1, err := deck.Import("./beeg_sqwirl.txt")
+	d1, err := deck.Import("./heads_i_win.txt")
 	if err != nil {
 		fmt.Printf("error importing deck: %s", err)
 	}
 
-	d2, err := deck.Import("./creative_squirrels_matter.txt")
+	d2, err := deck.Import("./mardu_surge.txt")
 	if err != nil {
 		fmt.Printf("error importing deck: %s", err)
 	}
 
-	toAdd := d1.Diff(d2)
-	toRemove := d2.Diff(d1)
+	// cards that are in common
+	intersect := d1.Intersect(d2)
+	fmt.Printf("Cards in both lists\n~~~~~~~~~~~~~~~~\n%s\n\n", intersect)
 
-	fmt.Printf("Cards to add\n============\n%s\n", toAdd)
-	fmt.Printf("~~~~~~~~~~~~\n%d cards\n\n", toAdd.Size())
-	fmt.Printf("Cards to remove\n===============\n%s\n", toRemove)
-	fmt.Printf("~~~~~~~~~~~~\n%d cards\n", toRemove.Size())
+	// cards only in precon
+	// justZurgo := d2.Diff(d1)
+	// fmt.Printf("Cards only in Zurgo\n~~~~~~~~~~~~~~~~~~~~~~\n%s\n\n", justZurgo)
 }
